@@ -1,0 +1,206 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  Design language: "phiếu tô trắc nghiệm" (OMR answer sheet).
+  - Desk  : cool grey the paper sits on
+  - Paper : white sheets with hairline borders, no drop shadows
+  - Ink   : ballpoint blue-black for text
+  - Sheet : the pink/magenta print of an answer sheet — grid rules & sheet labels only
+  - Lead  : 2B pencil graphite — a filled bubble = a chosen answer
+  - Right / Wrong : green / red, used only for grading feedback
+*/
+:root {
+  --desk: #eef1f4;
+  --paper: #ffffff;
+  --ink: #1b2433;
+  --ink-soft: #4a5568;
+  --ink-faint: #8a94a6;
+  --rule: #dfe3ea;
+  --sheet: #b3306a;
+  --sheet-rule: #e6a9bf;
+  --sheet-wash: #fbeef3;
+  --lead: #2e3238;
+  --pass: #1e8a57;
+  --pass-wash: #e6f4ec;
+  --fail: #cf3a2a;
+  --fail-wash: #fcebe8;
+  --late: #b7791f;
+  --late-wash: #fdf3e1;
+
+  /* shadcn tokens mapped onto the palette */
+  --radius: 0.375rem;
+  --background: var(--desk);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: #ffffff;
+  --secondary: #e4e8ee;
+  --secondary-foreground: var(--ink);
+  --muted: #e9edf2;
+  --muted-foreground: var(--ink-soft);
+  --accent: #e9edf2;
+  --accent-foreground: var(--ink);
+  --destructive: var(--fail);
+  --border: var(--rule);
+  --input: #cfd5de;
+  --ring: #5b6b85;
+}
+
+@theme inline {
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --color-desk: var(--desk);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-rule: var(--rule);
+  --color-sheet: var(--sheet);
+  --color-sheet-rule: var(--sheet-rule);
+  --color-sheet-wash: var(--sheet-wash);
+  --color-lead: var(--lead);
+  --color-pass: var(--pass);
+  --color-pass-wash: var(--pass-wash);
+  --color-fail: var(--fail);
+  --color-fail-wash: var(--fail-wash);
+  --color-late: var(--late);
+  --color-late-wash: var(--late-wash);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-desk text-ink font-sans antialiased;
+    font-feature-settings: "tnum" 0;
+  }
+  ::selection {
+    background: var(--sheet-wash);
+    color: var(--ink);
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Faint horizontal rules like an answer sheet's guide lines */
+  .sheet-lines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 27px,
+      var(--sheet-rule) 27px,
+      var(--sheet-rule) 28px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Celebration (end of a session) ---------- */
+@keyframes celebrate-burst {
+  0% {
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  35% {
+    transform: translate(var(--dx), var(--dy)) scale(1) rotate(calc(var(--rot) * 0.4));
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--dx) * 1.25), calc(var(--dy) + 70vh)) scale(0.9) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+.celebrate-particle {
+  opacity: 0;
+  animation-name: celebrate-burst;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  animation-fill-mode: forwards;
+}
+
+/* A teacher's stamp: drops in slightly too big, presses down, settles at a tilt. */
+@keyframes celebrate-stamp {
+  0% {
+    transform: scale(1.6) rotate(-9deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(0.94) rotate(-3deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.03) rotate(-4deg);
+  }
+  100% {
+    transform: scale(1) rotate(-3deg);
+    opacity: 1;
+  }
+}
+.celebrate-stamp {
+  transform: rotate(-3deg);
+  animation: celebrate-stamp 520ms cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+
+@keyframes celebrate-smile {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-14deg) scale(1.12);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(-6deg) scale(1.1);
+  }
+}
+.celebrate-smile {
+  animation: celebrate-smile 900ms ease-in-out 450ms 2;
+}
