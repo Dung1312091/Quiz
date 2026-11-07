@@ -10,7 +10,10 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <TooltipProvider delayDuration={300}>
       <RouterProvider router={router} />
-      <Toaster position="bottom-center" />
+      <Toaster
+        position="bottom-center"
+        mobileOffset={{ bottom: 'calc(var(--mobile-nav-h) + env(safe-area-inset-bottom) + 12px)' }}
+      />
     </TooltipProvider>
   </StrictMode>,
 )

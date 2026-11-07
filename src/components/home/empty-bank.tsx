@@ -24,10 +24,16 @@ export function EmptyBank() {
         <p className="text-[15px] text-ink-soft">
           Nạp một file Excel chứa câu hỏi và đáp án để bắt đầu ôn tập. Dữ liệu chỉ lưu trên trình duyệt này.
         </p>
-        <div>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
           <Button asChild size="lg">
             <Link to="/nap-cau-hoi">Nạp câu hỏi</Link>
           </Button>
+          <Link
+            to={{ pathname: "/nap-cau-hoi", hash: "#chuyen-may" }}
+            className="text-[15px] text-ink underline underline-offset-4 hover:no-underline"
+          >
+            Đã làm trên máy khác? Nhập file sao lưu
+          </Link>
         </div>
       </section>
 

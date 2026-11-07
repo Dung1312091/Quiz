@@ -97,7 +97,14 @@ export function DropZone({ onFiles, disabled }: { onFiles: (files: File[]) => vo
       <SheetStack active={dragging} />
       <div className="grid flex-1 gap-1">
         <p className="text-[17px] font-semibold text-ink">
-          {dragging ? 'Thả file vào đây' : 'Kéo file Excel hoặc CSV vào đây'}
+          {dragging ? (
+            'Thả file vào đây'
+          ) : (
+            <>
+              <span className="pointer-coarse:hidden">Kéo file Excel hoặc CSV vào đây</span>
+              <span className="hidden pointer-coarse:inline">Chọn file Excel hoặc CSV</span>
+            </>
+          )}
         </p>
         <p className="text-sm text-ink-soft">
           Có thể thêm nhiều file, nhiều lần. File chỉ được đọc khi bạn bấm Build.

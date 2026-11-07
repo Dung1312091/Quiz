@@ -11,6 +11,7 @@
   - Right / Wrong : green / red, used only for grading feedback
 */
 :root {
+  --mobile-nav-h: 3.75rem;
   --desk: #eef1f4;
   --paper: #ffffff;
   --ink: #1b2433;

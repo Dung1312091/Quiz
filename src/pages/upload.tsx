@@ -8,6 +8,7 @@ import { ImportReport } from '@/components/upload/import-report'
 import { PendingList } from '@/components/upload/pending-list'
 import { SourceList } from '@/components/upload/source-list'
 import { StartQuizPrompt } from '@/components/upload/start-quiz-prompt'
+import { TransferSection } from '@/components/upload/transfer-section'
 import { isAcceptedFile, parseQuizFile } from '@/lib/parser'
 import { useQuizStore } from '@/store/quiz-store'
 
@@ -110,6 +111,8 @@ export default function UploadPage() {
       )}
 
       <SourceList />
+
+      <TransferSection />
 
       <DangerZone />
 

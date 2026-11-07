@@ -38,3 +38,13 @@ npx vercel --prod # production
 ```
 
 Đặt Node.js version của project trên Vercel là 22.x.
+
+## Làm tiếp trên máy khác (điện thoại ↔ máy tính)
+
+Dữ liệu nằm trong trình duyệt của từng máy, nên cần chuyển bằng file sao lưu:
+
+1. Trên máy đang dùng: **Nạp câu hỏi → Chuyển sang máy khác → Xuất dữ liệu** (trên điện thoại có thêm nút **Chia sẻ** để gửi thẳng qua Zalo, AirDrop…). File `on-tap-trac-nghiem-YYYY-MM-DD.json` chứa ngân hàng câu hỏi, lượt đang làm dở, lịch sử, kết quả từng câu và cài đặt.
+2. Gửi file sang máy kia và mở app bằng cùng địa chỉ Vercel.
+3. Trên máy kia: **Nạp câu hỏi → Nhập dữ liệu** (khi máy còn trống, trang Tổng quan có sẵn đường dẫn). Xem lại nội dung file rồi bấm **Thay dữ liệu**. Toàn bộ dữ liệu trên máy đó được thay bằng nội dung file; lượt dở tiếp tục đúng câu đang làm.
+
+File không đúng định dạng, hỏng, hoặc quá lớn so với bộ nhớ trình duyệt sẽ bị từ chối và dữ liệu hiện có giữ nguyên.

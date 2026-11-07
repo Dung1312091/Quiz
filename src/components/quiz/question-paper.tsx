@@ -52,7 +52,7 @@ export function QuestionPaper({
   }, [focusOnMount])
 
   return (
-    <article className="relative overflow-hidden rounded-md border border-rule bg-paper">
+    <article className="relative overflow-clip rounded-md border border-rule bg-paper">
       <TimerLine elapsedMs={clock.elapsedMs} timeLimit={question.timeLimit} />
       <div className="px-4 pt-6 pb-5 sm:px-8 sm:pt-8 sm:pb-7">
         <header className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
@@ -99,13 +99,14 @@ export function QuestionPaper({
           )}
         </div>
 
-        <footer className="mt-6 flex flex-col gap-4 border-t border-rule pt-5 sm:flex-row sm:items-center sm:justify-between">
-          <div aria-live="polite" className="min-h-6">
+        {/* Phone: pinned above the bottom tab bar so Nộp / Tiếp tục is always within thumb reach. */}
+        <footer className="sticky bottom-[calc(var(--mobile-nav-h)+env(safe-area-inset-bottom))] z-10 -mx-4 mt-6 flex flex-col gap-3 border-t border-rule bg-paper px-4 pt-4 pb-4 sm:static sm:mx-0 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:px-0 sm:pt-5 sm:pb-0">
+          <div aria-live="polite" className="sm:min-h-6">
             {attempt && <ResultLine attempt={attempt} correct={question.correct} />}
           </div>
           {revealed ? (
             <div className="flex items-center gap-3">
-              <span className="hidden text-[13px] text-ink-faint sm:inline">
+              <span className="hidden text-[13px] text-ink-faint sm:pointer-fine:inline">
                 hoặc nhấn <kbd className="rounded-sm border border-rule bg-desk px-1.5 py-0.5 font-sans text-xs text-ink-soft">Space</kbd>
               </span>
               <Button size="lg" autoFocus onClick={onContinue} className="w-full sm:w-auto">

@@ -15,7 +15,8 @@ import type {
 import { questionId, shuffle, uid } from '@/lib/text'
 
 export const HISTORY_LIMIT = 50
-const STORAGE_KEY = 'on-tap-trac-nghiem:v1'
+export const STORAGE_KEY = 'on-tap-trac-nghiem:v1'
+export const STORAGE_VERSION = 1
 
 /* ---------- storage with quota handling ---------- */
 
@@ -114,7 +115,7 @@ export function wrongQuestionIds(s: Session): string[] {
 
 /* ---------- store ---------- */
 
-interface QuizState {
+export interface QuizState {
   bank: Record<string, Question>
   sources: Record<string, SourceFile>
   activeSession: Session | null
@@ -336,7 +337,7 @@ export const useQuizStore = create<QuizState & QuizActions>()(
     }),
     {
       name: STORAGE_KEY,
-      version: 1,
+      version: STORAGE_VERSION,
       storage: createJSONStorage(() => safeLocalStorage),
       partialize: ({ bank, sources, activeSession, history, lastResults, settings, lastImport }) => ({
         bank,
